@@ -21,18 +21,16 @@ var acceptedChars = [];
 
 // Write password to the #password input
 function writePassword() {
-
   getPasswordCriterias();
 
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 function getPasswordCriterias() {
-  var input = prompt("Enter your desired password length\n Must be an integer between 8 and 128", "");
+  var input = prompt("Enter your desired password length\nMust be an integer between 8 and 128", "");
 
   if(input != null && input != "") {
     var num = parseInt(input);
@@ -50,24 +48,35 @@ function getPasswordCriterias() {
 }
 
 function setCriterias() {
+  var flag = true;
+
   if(confirm("Would you like to include lowercase letters?")) {
+    flag = false;
     acceptedChars = acceptedChars.concat(lowercase);
   } 
 
   if(confirm("Would you like to include uppercase letters?")) {
+    flag = false;
     acceptedChars = acceptedChars.concat(uppercase);
   } 
 
   if(confirm("Would you like to include numbers?")) {
+    flag = false;
     acceptedChars = acceptedChars.concat(digits);
   } 
 
   if(confirm("Would you like to include special characters?")) {
+    flag = false;
     acceptedChars = acceptedChars.concat(specialChar);
   } 
+
+  if(flag) {
+    alert("You must select atleast 1 password criteria (uppercase, lowercase, numbers, special characters)");
+  }
 }
 
 function generatePassword() {
+
   var result = [];
 
   for(var i = 0; i < passwordLength; i++) {
